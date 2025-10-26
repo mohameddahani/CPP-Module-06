@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 13:04:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/10/26 13:16:03 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/10/26 15:15:23 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iostream>
 
 // * Class With Orthodox Canonical Form
+// ! utility class
 class ScalarConverter {
     // ! public
     public:
@@ -38,7 +39,5 @@ class ScalarConverter {
         // * Methods
         static void convert(std::string &value);
 };
-
-std::ostream &operator<<(std::ostream &output, const ScalarConverter &other);
 
 #endif

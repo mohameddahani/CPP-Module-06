@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 13:05:20 by mdahani           #+#    #+#             */
-/*   Updated: 2025/10/26 13:19:14 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/10/26 14:55:06 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,10 @@ ScalarConverter::~ScalarConverter(){
 
 // * Methods
 void ScalarConverter::convert(std::string &value){
-    
+    // char: '*'
+    // int: 42
+    // float: 42.0f
+    // double: 42.0
+
+    std::cout << "char: " << char(value) << std::endl;
 }
