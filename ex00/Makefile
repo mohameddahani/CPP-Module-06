@@ -1,6 +1,6 @@
 NAME = casting
 
-SRCS =  main.cpp Bureaucrat.cpp
+SRCS =  main.cpp ScalarConverter.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

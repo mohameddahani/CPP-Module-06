@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 13:04:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/10/26 15:15:23 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/10/27 17:27:54 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 // * Includes
 #include <iostream>
+// #include <cctype>
+#include <limits>
 
 // * Class With Orthodox Canonical Form
 // ! utility class
@@ -23,9 +25,6 @@ class ScalarConverter {
     public:
         // * Default constructor
         ScalarConverter();
-
-        // // * Parametrised constructor
-        // ScalarConverter(const std::string &name, const unsigned int &grade);
 
         // * Copy constructor
         ScalarConverter(const ScalarConverter &other);
@@ -37,7 +36,12 @@ class ScalarConverter {
         ~ScalarConverter();
         
         // * Methods
-        static void convert(std::string &value);
+        static void convert(const std::string &value);
+        static void printConvert(const long long &num, const char &mode);
+        static void printChar(const char &c);
+        static void printInt(const long long &num);
+        static void printFloat(const long long &num);
+        static void printDouble(const long long &num);
 };
 
 #endif
