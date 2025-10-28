@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 13:04:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/10/27 17:27:54 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/10/28 08:58:22 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 // * Includes
 #include <iostream>
+#include <cstdlib>
 // #include <cctype>
 #include <limits>
 
@@ -38,7 +39,7 @@ class ScalarConverter {
         // * Methods
         static void convert(const std::string &value);
         static void printConvert(const long long &num, const char &mode);
-        static void printChar(const char &c);
+        static void printChar(const long long &num);
         static void printInt(const long long &num);
         static void printFloat(const long long &num);
         static void printDouble(const long long &num);
