@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 10:00:53 by mdahani           #+#    #+#             */
-/*   Updated: 2025/10/28 09:03:03 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/10/28 17:36:08 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int main(int ac, char **av){
     }
     
     ScalarConverter obj;
-    obj.convert(av[1]);
+    std::string value = av[1];
+    obj.convert(value);
 
 
 

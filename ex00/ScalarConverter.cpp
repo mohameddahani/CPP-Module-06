@@ -6,13 +6,16 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 13:05:20 by mdahani           #+#    #+#             */
-/*   Updated: 2025/10/28 09:46:45 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/10/29 09:50:50 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
 // ! Definitions of Orthodox Canonical Form, Member functions, and Setters, Getters
+
+// * Static variable
+std::string ScalarConverter::pseudoLiterals = ""; 
 
 // * Default constructor
 ScalarConverter::ScalarConverter(){
@@ -41,96 +44,78 @@ ScalarConverter::~ScalarConverter(){
 }
 
 // * Methods
-void ScalarConverter::convert(const std::string &value){
-    // todo: check if is empty
-    // char: '*'
-    // int: 42
-    // float: 42.0f
-    // double: 42.0
+void ScalarConverter::convert(std::string &value){
+    if (value.empty()){
+        std::cout << "Error" << std::endl;
+        return ;
+    }
 
-    // float isOneChar = false;
-
-    // * check if a character
+    // * check if one character
     if (value.length() == 1){
-        // if (isOneChar){
-            printConvert(value[0], 'c');
-        // }
+        if (isdigit(value[0])){
+            printConvert(atoi(value.c_str()));
+        } else {
+            printConvert(value[0]);
+        }
     }
     // * check if more than character
     else {
-        int points = 0;
-        int fCount = 0;
-        // * check chars
-        for (int i = 0; value[i]; i++){
-            // * check how many points i have
-            if (value[i] == '.' && !isdigit(value[i + 1])){
-                std::cout << "Error1" << std::endl;
-                return ;
-            } else if (value[i] == '.' && isdigit(value[i + 1])) {
-                points++;
-                continue;
-            }
-            
-            // * check if (f) in the last
-            if (value[i] == 'f' && value[i + 1]){
-                std::cout << "Error2" << std::endl;
-                return ;
-            } else if (value[i] == 'f' && !value[i + 1]){
-                fCount++;
-                continue;
-            }
-
-            if (!isdigit(value[i])){
-                std::cout << "Error3" << std::endl;
-                return ;
-            }
+        // * check pseudo literals
+        if (value == "nan" || value == "nanf" || value == "+inf" || value == "-inf" || value == "+inff" || value == "-inff"){
+            pseudoLiterals = value;
         }
+        
+        char *end = NULL;
 
-        // * check the number of points & char f
-        if (points > 1 || fCount > 1){
-            std::cout << "Error4" << std::endl;
+        // * remove (f) if she the last
+        if (value[value.length() - 1] == 'f'){
+            value[value.length() - 1] = '\0';
+        }
+        
+        double num = strtod(value.c_str(), &end);
+        
+        if (*end != '\0' && !pseudoLiterals[0]){
+            std::cout << "Error" << std::endl;
+            return ;
+        }
+        if (value[value.length() - 1] == '.'){
+            std::cout << "Error" << std::endl;
+            return ;
+        }
+        if (value[0] == '.'){
+            std::cout << "Error" << std::endl;
+            return ;
+        }
+        if (value[1] == '.' && (value[0] == '+' || value[0] == '-')){
+            std::cout << "Error" << std::endl;
             return ;
         }
 
-        // * check if float
-        if (fCount && points){
-            long long num = atoll(value.c_str());
-            printConvert(num, 'f');
-        }
-        // * check if double
-        else if (!fCount && points){
-            // todo: send double number
-            // double floatNum = atod(value.c_str());
-            // printConvert(floatNum, 'd');
-        }
-        // * check if int
-        else if (!fCount && !points){
-            long long num = atoll(value.c_str());
-            printConvert(num, 'i');
-        }
-    }    
+        // * print the convertion
+        printConvert(num);
+    }
 }
 
-void ScalarConverter::printConvert(const long long &num, const char &mode){
-    (void)mode;
+void ScalarConverter::printConvert(const double &num){
     printChar(num);
     printInt(num);
     printFloat(num);
     printDouble(num);
 }
 
-void ScalarConverter::printChar(const long long &num){
-        if (num < 0 || num > 127){
+void ScalarConverter::printChar(const double &num){
+    if ((num < 0 || num > 127) || std::isnan(num) || std::isinf(num) || pseudoLiterals == "+inf" || pseudoLiterals == "-inf"){
         std::cout << "char: " << "impossible" << std::endl;
-        } else if (std::isprint(num)){
-            std::cout << "char: " << static_cast<char>(num) << std::endl;
-        } else {
-            std::cout << "char: " << "Non displayable" << std::endl;
-        }
+    } else if (std::isprint(num)){
+        std::cout << "char: " << static_cast<char>(num) << std::endl;
+    } else {
+        std::cout << "char: " << "Non displayable" << std::endl;
+    }
 }
 
-void ScalarConverter::printInt(const long long &num){
-    if (num > std::numeric_limits<int>::max() || num < std::numeric_limits<int>::min()){
+void ScalarConverter::printInt(const double &num){
+    if (num > std::numeric_limits<int>::max() || num < std::numeric_limits<int>::min() || std::isnan(num)
+        || pseudoLiterals == "+inf" || pseudoLiterals == "-inf"){
         std::cout << "int: " << "impossible" << std::endl;
     }
     else {
@@ -138,19 +123,36 @@ void ScalarConverter::printInt(const long long &num){
     }
 }
 
-void ScalarConverter::printFloat(const long long &num){
-    if (num > std::numeric_limits<float>::max() || num < std::numeric_limits<float>::min()){
+void ScalarConverter::printFloat(const double &num){
+    if (pseudoLiterals == "+inf"){
+        std::cout << "float: " << "+inff" << std::endl;
+    } else if (pseudoLiterals == "-inf"){
+        std::cout << "float: " << "-inff" << std::endl;
+    } else if (pseudoLiterals == "+inff") {
+         std::cout << "float: " << "+inff" << std::endl;
+    } else if (pseudoLiterals == "-inff") {
+         std::cout << "float: " << "-inff" << std::endl;
+    } else if (num > std::numeric_limits<float>::max() || num < -std::numeric_limits<float>::max()){
         std::cout << "float: " << "impossible" << std::endl;
-    }
-    else {
-        std::cout << "float: " << static_cast<float>(num) << ".0f" << std::endl;
+    } else {
+        // * Using with std::fixed to control decimal places
+        std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(num) << "f" << std::endl;
     }
 }
-void ScalarConverter::printDouble(const long long &num){
-    if (num > std::numeric_limits<double>::max() || num < std::numeric_limits<double>::min()){
+
+void ScalarConverter::printDouble(const double &num){
+    if (pseudoLiterals == "+inf"){
+        std::cout << "double: " << "+inf" << std::endl;
+    } else if (pseudoLiterals == "-inf"){
+        std::cout << "double: " << "-inf" << std::endl;
+    } else if (pseudoLiterals == "+inff") {
+         std::cout << "double: " << "+inf" << std::endl;
+    } else if (pseudoLiterals == "-inff") {
+         std::cout << "double: " << "-inf" << std::endl;
+    } else if (num > std::numeric_limits<double>::max() || num < -std::numeric_limits<double>::max()){
         std::cout << "double: " << "impossible" << std::endl;
-    }
-    else {
-        std::cout << "double: " << static_cast<float>(num) << ".0" << std::endl;
+    } else {
+        // * We don't need to add std::fixed << std::setprecision(1) because if all ready active on printFloat 
+        std::cout << "double: " << static_cast<double>(num) << std::endl;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 13:04:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/10/28 08:58:22 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/10/29 09:58:28 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 
 // * Includes
 #include <iostream>
-#include <cstdlib>
-// #include <cctype>
+#include <iomanip>
+#include <cmath>
 #include <limits>
 
 // * Class With Orthodox Canonical Form
 // ! utility class
 class ScalarConverter {
+    private:
+        static std::string pseudoLiterals;
     // ! public
     public:
         // * Default constructor
@@ -37,12 +39,12 @@ class ScalarConverter {
         ~ScalarConverter();
         
         // * Methods
-        static void convert(const std::string &value);
-        static void printConvert(const long long &num, const char &mode);
-        static void printChar(const long long &num);
-        static void printInt(const long long &num);
-        static void printFloat(const long long &num);
-        static void printDouble(const long long &num);
+        static void convert(std::string &value);
+        static void printConvert(const double &num);
+        static void printChar(const double &num);
+        static void printInt(const double &num);
+        static void printFloat(const double &num);
+        static void printDouble(const double &num);
 };
 
 #endif
