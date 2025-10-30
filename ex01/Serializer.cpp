@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 13:05:20 by mdahani           #+#    #+#             */
-/*   Updated: 2025/10/30 11:43:57 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/10/30 14:15:26 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@
 
 // ! Definitions of Orthodox Canonical Form, Member functions, and Setters, Getters
 
-// * Static variable
-// std::string Serializer::pseudoLiterals = ""; 
-
 // * Default constructor
 Serializer::Serializer(){
     std::cout << "Default constructor of Serializer is called" << std::endl;
@@ -84,3 +81,10 @@ Serializer::~Serializer(){
 }
 
 // * Methods
+uintptr_t Serializer::serialize(Data *ptr){
+    return reinterpret_cast<uintptr_t>(ptr);
+}
+
+Data *Serializer::deserialize(uintptr_t raw){
+    return reinterpret_cast<Data *>(raw);
+}
