@@ -1,51 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 13:04:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/10/30 11:45:48 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/10/29 10:53:56 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTER_HPP
-# define SCALARCONVERTER_HPP
+#ifndef SERIALIZER_HPP
+# define SERIALIZER_HPP
 
 // * Includes
 #include <iostream>
-#include <iomanip>
-#include <cmath>
-#include <limits>
+#include <stdint.h>
 
 // * Class With Orthodox Canonical Form
-// ! utility class
-class ScalarConverter {
+class Serializer {
     private:
         static std::string pseudoLiterals;
-
-        // * Default constructor
-        ScalarConverter();
-    
-        // * Copy constructor
-        ScalarConverter(const ScalarConverter &other);
-    
-        // * Copy assignment operator
-        ScalarConverter &operator=(const ScalarConverter &other);
-    
-        // * Destructor
-        ~ScalarConverter();
-
     // ! public
     public:
+        // * Default constructor
+        Serializer();
+
+        // * Copy constructor
+        Serializer(const Serializer &other);
+
+        // * Copy assignment operator
+        Serializer &operator=(const Serializer &other);
+
+        // * Destructor
+        ~Serializer();
+        
         // * Methods
-        static void convert(std::string &value);
-        static void printConvert(const double &num);
-        static void printChar(const double &num);
-        static void printInt(const double &num);
-        static void printFloat(const double &num);
-        static void printDouble(const double &num);
+        static uintptr_t serialize(Data* ptr);
+        static Data* deserialize(uintptr_t raw);
 };
 
 #endif
