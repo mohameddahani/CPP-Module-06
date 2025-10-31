@@ -6,12 +6,19 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 14:16:33 by mdahani           #+#    #+#             */
-/*   Updated: 2025/10/30 15:34:18 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/10/31 18:55:18 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Methods.hpp"
 
 int main(){
-    
+    Base *base = generate();
+    std::cout << "========================" << std::endl;
+    identify(base);
+    std::cout << "========================" << std::endl;
+    identify(*base);
+    std::cout << "========================" << std::endl;
+
+    delete base;
 }
