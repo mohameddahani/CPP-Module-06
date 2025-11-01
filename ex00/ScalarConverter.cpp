@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 13:05:20 by mdahani           #+#    #+#             */
-/*   Updated: 2025/10/29 09:50:50 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/11/01 11:34:58 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void ScalarConverter::printFloat(const double &num){
          std::cout << "float: " << "+inff" << std::endl;
     } else if (pseudoLiterals == "-inff") {
          std::cout << "float: " << "-inff" << std::endl;
-    } else if (num > std::numeric_limits<float>::max() || num < -std::numeric_limits<float>::max()){
+    } else if (num > std::numeric_limits<float>::max() || num < -std::numeric_limits<float>::max()){ // * The largest possible negative value
         std::cout << "float: " << "impossible" << std::endl;
     } else {
         // * Using with std::fixed to control decimal places
@@ -149,7 +149,7 @@ void ScalarConverter::printDouble(const double &num){
          std::cout << "double: " << "+inf" << std::endl;
     } else if (pseudoLiterals == "-inff") {
          std::cout << "double: " << "-inf" << std::endl;
-    } else if (num > std::numeric_limits<double>::max() || num < -std::numeric_limits<double>::max()){
+    } else if (num > std::numeric_limits<double>::max() || num < -std::numeric_limits<double>::max()){ // * The largest possible negative value
         std::cout << "double: " << "impossible" << std::endl;
     } else {
         // * We don't need to add std::fixed << std::setprecision(1) because if all ready active on printFloat 
